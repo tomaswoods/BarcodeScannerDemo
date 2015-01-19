@@ -84,22 +84,10 @@ var app = {
             tx.executeSql('DROP TABLE IF EXISTS allergy_table');
             tx.executeSql('CREATE TABLE IF NOT EXISTS allergy_table (id integer primary key, category text,brand text,product text,containsMI integer,containsMCI integer,containsIS integer)');
 
-            tx.executeSql("INSERT INTO allergy_table (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Shampoo", "L'Oreal", "Elvive Nutri-Gloss Shampoo", 0, 0, 0], function (tx, res) {
-                console.log("insertId: " + res.insertId + " -- probably 1");
-                console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
-                alert("We got a barcode\n" +
-                "insertId: " + res.insertId + " -- probably 1\n" +
-                "rowsAffected: " + res.rowsAffected + " -- should be 1\n");
-            }, function (e) {
-                console.log("ERROR: " + e.message);
-            });
-            tx.executeSql("INSERT INTO allergy_table (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Shampoo", "L'Oreal", "Paris Elvive Anti Dandruff ", 1, 0, 0], function (tx, res) {
-                alert("We got a barcode\n" +
-                "insertId: " + res.insertId + " -- probably 2\n" +
-                "rowsAffected: " + res.rowsAffected + " -- should be 2\n");
-            }, function (e) {
-                console.log("ERROR: " + e.message);
-            });
+            tx.executeSql('INSERT INTO allergy_table (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Shampoo", "LOreal", "Elvive Nutri-Gloss Shampoo", 0, 0, 0])');
+            tx.executeSql('INSERT INTO allergy_table (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Shampoo", "LOreal", "Paris Elvive Anti Dandruff ", 1, 0, 0])');
+            tx.executeSql('INSERT INTO allergy_table (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Washing-up Liquid", "Fairy", "Fairy 500ml", 0, 1, 0])');
+
         });
     }
 };

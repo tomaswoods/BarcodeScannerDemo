@@ -9,22 +9,17 @@
     <meta name="copyright" content="Tomas Woods &copy; 2015, All right reserved." />
     <link rel="stylesheet" href="css/core.css" type="text/css" media="screen" charset="utf-8" />
     <link rel="stylesheet" href="css/menu.css" type="text/css" media="screen" charset="utf-8" />
+    <script type="text/javascript" src="js/browse.js"></script>
 </head>
-<body id="menu-page" class="interior">
+<body id="menu-page" class="interior" onload="dbConnect();">
     <div id="site">
         <div id="page-content">
             <div id="content">
                 <h2 class="menu">Categories<a href="index.html" class="home">Back</a></h2>
-                <ul class="landing-nav">
-                    <li><a href="details/buoyinfo.html">Temperature &amp; Wind Info </a></li>
-                    <li><a href="details/tideinfo.html">Tide Info</a></li>
-                    <li><a href="details/webcams/camera1.html">Webcam 1</a></li>
-                    <li><a href="details/webcams/camera2.html">Webcam 2</a></li>
-                </ul>
+                <ul class="landing-nav" id="categories"></ul>
             </div>
             <p class="copyright">Tomás Woods &copy; 2014, All rights reserved.</p>
         </div>
-    </div>
-
+    </div>    
 </body>
 </html>
