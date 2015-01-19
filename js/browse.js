@@ -13,7 +13,7 @@ function dbConnect() {
 //select all from MyFriends
 function queryDB(tx) {
     alert("success1");
-    tx.executeSql('SELECT DISTINCT category FROM allergy_table', [], querySuccess, errorDB);
+    tx.executeSql('SELECT * FROM allergy_table', [], querySuccess, errorDB);
 }
   
 function querySuccess(tx, result) {
