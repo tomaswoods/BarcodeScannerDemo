@@ -28,6 +28,7 @@ var app = {
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
         document.getElementById('scan').addEventListener('click', this.scan, false);
+        document.getElementById('products').addEventListener('click', this.updateproducts, false);
     },
 
     // deviceready Event Handler
@@ -36,6 +37,7 @@ var app = {
     // function, we must explicity call `app.receivedEvent(...);`
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        
     },
 
     // Update DOM on a Received Event
@@ -71,6 +73,33 @@ var app = {
 
         }, function (error) {
             console.log("Scanning failed: ", error);
+        });
+    },
+    updateproducts: function () {
+        console.log('updating');
+
+        var db = window.sqlitePlugin.openDatabase({ name: "AllergyDB" });
+
+        db.transaction(function (tx) {
+            tx.executeSql('DROP TABLE IF EXISTS allergy_table');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS allergy_table (id integer primary key, category text,brand text,product text,containsMI integer,containsMCI integer,containsIS integer)');
+
+            tx.executeSql("INSERT INTO allergy_table (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Shampoo", "L'Oreal", "Elvive Nutri-Gloss Shampoo", 0, 0, 0], function (tx, res) {
+                console.log("insertId: " + res.insertId + " -- probably 1");
+                console.log("rowsAffected: " + res.rowsAffected + " -- should be 1");
+                alert("We got a barcode\n" +
+                "insertId: " + res.insertId + " -- probably 1\n" +
+                "rowsAffected: " + res.rowsAffected + " -- should be 1\n");
+            }, function (e) {
+                console.log("ERROR: " + e.message);
+            });
+            tx.executeSql("INSERT INTO allergy_table (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Shampoo", "L'Oreal", "Paris Elvive Anti Dandruff ", 1, 0, 0], function (tx, res) {
+                alert("We got a barcode\n" +
+                "insertId: " + res.insertId + " -- probably 2\n" +
+                "rowsAffected: " + res.rowsAffected + " -- should be 2\n");
+            }, function (e) {
+                console.log("ERROR: " + e.message);
+            });
         });
     }
 };
