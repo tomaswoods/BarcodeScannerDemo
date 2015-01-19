@@ -11,7 +11,8 @@ function dbConnect() {
 }
   
 //select all from MyFriends
-function queryDB(tx){
+function queryDB(tx) {
+    alert("success1");
     tx.executeSql('SELECT DISTINCT category FROM allergy_table', [], querySuccess, errorDB);
 }
   
