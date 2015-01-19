@@ -84,10 +84,14 @@ var app = {
             tx.executeSql('DROP TABLE IF EXISTS allergy_table');
             tx.executeSql('CREATE TABLE IF NOT EXISTS allergy_table (id integer primary key, category text,brand text,product text,containsMI integer,containsMCI integer,containsIS integer)');
 
-            tx.executeSql('INSERT INTO allergy_table (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Shampoo", "LOreal", "Elvive Nutri-Gloss Shampoo", 0, 0, 0])');
-            tx.executeSql('INSERT INTO allergy_table (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Shampoo", "LOreal", "Paris Elvive Anti Dandruff ", 1, 0, 0])');
-            tx.executeSql('INSERT INTO allergy_table (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Washing-up Liquid", "Fairy", "Fairy 500ml", 0, 1, 0])');
-
+            tx.executeSql("INSERT INTO allergy_table (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Shampoo", "L'Oreal", "Elvive Nutri-Gloss Shampoo", 0, 0, 0], function (tx, res) {
+            }, function (e) {
+                console.log("ERROR: " + e.message);
+            });
+            tx.executeSql("INSERT INTO allergy_table (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Shampoo", "L'Oreal", "Paris Elvive Anti Dandruff ", 1, 0, 0], function (tx, res) {
+            }, function (e) {
+                console.log("ERROR: " + e.message);
+            });
         });
     }
 };
