@@ -6,14 +6,14 @@ function errorDB(err) {
 //function will be called when process succeed
 function dbConnect() {
     alert("success!");
-    var db = window.openDatabase("AllergyDB", "1.0", "AllergyDB", 200000);
+    var db = window.openDatabase("MyAllergy", "1.0", "MyAllergy", 200000);
     db.transaction(queryDB,errorDB);
 }
   
 //select all from MyFriends
 function queryDB(tx) {
     alert("success1");
-    tx.executeSql('SELECT * FROM allergy_table', [], querySuccess, errorDB);
+    tx.executeSql('SELECT * FROM MyAllergy', [], querySuccess, errorDB);
 }
   
 function querySuccess(tx, result) {
