@@ -14,7 +14,7 @@ function dbConnect() {
 
             $('#categories').listview();
         }, function (e) {
-            console.log("ERROR: " + e.message);
+            alert("ERROR: " + e.message);
         });
     });
 }
