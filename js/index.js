@@ -78,7 +78,7 @@ var app = {
     updateproducts: function () {
         console.log('updating');
 
-        var db = window.sqlitePlugin.openDatabase({ name: "MyAllergy" });
+        var db = window.sqlitePlugin.openDatabase("MyAllergy", "1.0", "MyAllergy", 200000);
 
         db.transaction(function (tx) {
             tx.executeSql('DROP TABLE IF EXISTS MyAllergy');
