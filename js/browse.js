@@ -3,7 +3,7 @@ function dbConnect() {
     alert("success!");
     var db = window.sqlitePlugin.openDatabase("MyAllergy", "1.0", "Allergy Demo", 200000);
     db.transaction(function (tx) {
-        tx.executeSql("SELECT * FROM MyTable ORDER BY id", [], function (tx, result) {
+        tx.executeSql("SELECT * FROM MyAllergy", [], function (tx, result) {
             alert("selected successfull");
             $('#categories').empty();
             $.each(result.rows, function (index) {
