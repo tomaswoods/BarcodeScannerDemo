@@ -77,24 +77,19 @@ var app = {
     },
     updateproducts: function () {
         console.log('updating');
-
-        var db = window.sqlitePlugin.openDatabase("MyAllergy", "1.0", "Allergy Demo", 200000);
-
+        var db;
+        if (window.sqlitePlugin !== undefined) {
+            db = window.sqlitePlugin.openDatabase("MyFriends");
+        } else {
+            // For debugging in simulator fallback to native SQL Lite
+            db = window.openDatabase("MyFriends", "1.0", "MyFriends Demo", 200000);
+        }
         db.transaction(function (tx) {
-            tx.executeSql('DROP TABLE IF EXISTS MyAllergy');
-            tx.executeSql('CREATE TABLE IF NOT EXISTS MyAllergy (id integer primary key, category text,brand text,product text,containsMI integer,containsMCI integer,containsIS integer)');
-
-            tx.executeSql("INSERT INTO MyAllergy (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Shampoo", "L'Oreal", "Elvive Nutri-Gloss Shampoo", 0, 0, 0], function (tx, res) {
-                alert("insertId: " + res.insertId + " -- probably 1\n");
-            }, function (e) {
-                console.log("ERROR: " + e.message);
-            });
-            tx.executeSql("INSERT INTO MyAllergy (category,brand,product,containsMI ,containsMCI,containsIS) VALUES (?,?,?,?,?,?)", ["Shampoo", "L'Oreal", "Paris Elvive Anti Dandruff ", 1, 0, 0], function (tx, res) {
-                alert("insertId: " + res.insertId + " -- probably 2\n");
-            }, function (e) {
-                console.log("ERROR: " + e.message);
-            });
-
+            tx.executeSql('CREATE TABLE IF NOT EXISTS MyFriends (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, Nickname TEXT NOT NULL)');
+            tx.executeSql('INSERT INTO MyFriends(Name,Nickname) VALUES ("Sunil Gupta", "android")');
+            tx.executeSql('INSERT INTO MyFriends(Name,Nickname) VALUES ("Abhishek Tripathi", "Champoo")');
+            tx.executeSql('INSERT INTO MyFriends(Name,Nickname) VALUES ("Sandeep Pal", "kaliya sandy")');
+            tx.executeSql('INSERT INTO MyFriends(Name,Nickname) VALUES ("AmitVerma", "Budhiya")');
         });
     }
 

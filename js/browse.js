@@ -1,19 +1,21 @@
  //function will be called when process succeed
 function dbConnect() {
     alert("success!");
-    var db = window.sqlitePlugin.openDatabase("MyAllergy", "1.0", "Allergy Demo", 200000);
+    var db;
+    if (window.sqlitePlugin !== undefined) {
+        db = window.sqlitePlugin.openDatabase("MyFriends");
+    } else {
+        // For debugging in simulator fallback to native SQL Lite
+        db = window.openDatabase("MyFriends", "1.0", "MyFriends Demo", 200000);
+    }
     db.transaction(function (tx) {
-        tx.executeSql("SELECT * FROM MyAllergy", [], function (tx, result) {
-            alert("selected successfull");
-            $('#categories').empty();
-            $.each(result.rows, function (index) {
-                var row = result.rows.item(index);
-                $('#categories').append('< li>< a href=" #">< h3 class="ui-li-heading">' + row['category'] + '< /h3>< /a>< /li>');
-            });
-
-            $('#categories').listview();
+        tx.executeSql('SELECT * FROM MyFriends', [], function (tx, r) {
+            for (var i = 0; i < rs.rows.length; i++) {
+                alert(rs.rows.item(i));
+            }            
         }, function (tx, e) {
-            console.log("SQLite Error: " + e.message);
+            alert("SQLite Error: " + e.message);
         });
+
     });
 }
