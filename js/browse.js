@@ -1,7 +1,7 @@
  //function will be called when process succeed
 function dbConnect() {
     alert("success!");
-    var db = window.openDatabase("MyAllergy", "1.0", "MyAllergy", 200000);
+    var db = window.sqlitePlugin.openDatabase({ name: "MyAllergy" });
     db.transaction(function (tx) {
         alert("successfull");
         tx.executeSql("SELECT * FROM MyAllergy", function (tx, result) {
