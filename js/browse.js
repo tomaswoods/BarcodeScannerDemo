@@ -2,8 +2,8 @@
 function dbConnect() {
     alert("success!");
     var db = window.openDatabase("MyAllergy", "1.0", "MyAllergy", 200000);
-    db.transaction(queryDB, errorDB);
     db.transaction(function (tx) {
+        alert("successfull");
         tx.executeSql("SELECT * FROM MyAllergy", function (tx, result) {
             alert("selected successfull");
             $('#categories').empty();
