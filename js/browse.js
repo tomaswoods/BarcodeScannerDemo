@@ -1,6 +1,6 @@
 //function will be called when an error occurred
 function errorDB(err) {
-    alert("Error processing SQL: "+err.code);
+    alert("Error processing SQL: " + err.message);
 }
   
 //function will be called when process succeed
